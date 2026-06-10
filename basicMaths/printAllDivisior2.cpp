@@ -4,9 +4,9 @@
 #include<vector>
 using namespace std;
 
-vector<int> divisor(int num){
+void divisor(int num){
     vector<int> list ;
-    for(int i=1; i<= sqrt(num); i++){
+    for(int i=1; i*i<=num; i++){
         if(num % i == 0){
             list.push_back(i);
             if(num / i != i){
@@ -16,7 +16,9 @@ vector<int> divisor(int num){
         
     }
     sort(list.begin(), list.end());
-    return list;
+    for(auto it : list){
+        cout << it << endl ;
+    }
 }
 
 int main(){
@@ -28,10 +30,8 @@ int main(){
         int num;
         cout << "Enter number : ";
         cin >> num;
-        vector<int> result = divisor(num);
-        for(int it : result){
-            cout<<it << endl ;
-        }
+        divisor(num);
+        
     }
     return 0;
 }
