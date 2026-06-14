@@ -18,6 +18,13 @@ int main(){
         mpp[arr[i]]++ ;
     }
 
+
+    // iterate in map
+
+    for(auto it : mpp){
+        cout<<it.first << "->" << it.second ; 
+    }
+
     // Taking queries
 
     int q;
