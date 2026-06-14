@@ -20,6 +20,7 @@ int main(){
 
 
     // iterate in map
+    // map store all value in sorted manner
 
     for(auto it : mpp){
         cout<<it.first << "->" << it.second ; 
