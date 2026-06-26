@@ -20,16 +20,41 @@ using namespace std;
 
 // Better Approch
 
+// int majorityElement(vector<int> &arr, int n){
+//     map<int, int> mpp;
+//     for(int i=0; i<n; i++){
+//         mpp[arr[i]]++;
+//     }
+//     for(auto it : mpp){
+//         if(it.second > (n / 2)){
+//             return it.first;
+//         }
+//     }
+//     return -1;
+// }
+
+// Optimal Approch using moore's algorithm
+
 int majorityElement(vector<int> &arr, int n){
-    map<int, int> mpp;
+    int element;
+    int cnt =0;
     for(int i=0; i<n; i++){
-        mpp[arr[i]]++;
+        if(cnt == 0){
+            cnt++;
+            element = arr[i];
+        }
+        else if(arr[i] == element){
+            cnt++;
+        }
+        else cnt--;
     }
-    for(auto it : mpp){
-        if(it.second > (n / 2)){
-            return it.first;
+    int cnt1 = 0;
+    for(int i=0; i<n; i++){
+        if(arr[i] == element){
+            cnt++;
         }
     }
+    if(cnt1 > n/2) return element;
     return -1;
 }
 
