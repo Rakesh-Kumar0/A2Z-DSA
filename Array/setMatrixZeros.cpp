@@ -77,7 +77,7 @@ using namespace std;
         for(int j=1; j<m; j++){
             if(mat[i][j] != 0){
                 // check for row and col
-                if(mat[i][0] || mat[0][j] == 0){
+                if((mat[i][0] || mat[0][j]) == 0){
                     mat[i][j] = 0;
                 }
             }
