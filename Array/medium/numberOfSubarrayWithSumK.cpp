@@ -4,14 +4,30 @@
 using namespace std;
 
 //brute force approch
+// int numberOfSubarrayWithSumK(vector<int> &arr, int n, int k){
+//     int cnt = 0;
+//     for(int i=0; i<n; i++){
+//         for(int j=i; j<n; j++){
+//             int sum = 0;
+//             for(int k=i; k<=j; k++){
+//                 sum +=arr[k];
+//             }
+//             if(sum == k){
+//                 cnt++;
+//             }
+//         }
+//     }
+//     return cnt;
+// }
+
+//better approch
+
 int numberOfSubarrayWithSumK(vector<int> &arr, int n, int k){
     int cnt = 0;
     for(int i=0; i<n; i++){
+        int sum = 0;
         for(int j=i; j<n; j++){
-            int sum = 0;
-            for(int k=i; k<=j; k++){
-                sum +=arr[k];
-            }
+            sum +=arr[j];
             if(sum == k){
                 cnt++;
             }
@@ -19,6 +35,9 @@ int numberOfSubarrayWithSumK(vector<int> &arr, int n, int k){
     }
     return cnt;
 }
+
+
+
 
 int main(){
     int n;
