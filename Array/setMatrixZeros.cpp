@@ -36,28 +36,61 @@ using namespace std;
 
 // better approch
 
-void setMatrixZeroes(vector<vector<int>> &mat, int n, int m){
-    vector<int> row(n);
-    vector<int> col(m);
+// void setMatrixZeroes(vector<vector<int>> &mat, int n, int m){
+//     vector<int> row(n);
+//     vector<int> col(m);
+//     for(int i=0; i<n; i++){
+//         for(int j=0; j<m; j++){
+//             if(mat[i][j] == 0){
+//                 row[i] = 1;
+//                 col[j] = 1;
+//             }
+//         }
+//     }
+//     for(int i=0; i<n; i++){
+//         for(int j=0; j<m; j++){
+//             if(row[i] || col[j]){
+//                 mat[i][j] = 0;
+//             }
+//         }
+//     }
+// }
+
+
+// Optimal approch
+ void setMatrixZeroes(vector<vector<int>> &mat, int n, int m){
+    int col0 = 1;
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
             if(mat[i][j] == 0){
-                row[i] = 1;
-                col[j] = 1;
+                // mark the i-th row
+                mat[i][0] = 0;
+                // mark the j-th column
+                if(j != 0)
+                    mat[0][j] = 0;
+                else
+                col0 = 0;
             }
         }
     }
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(row[i] || col[j]){
-                mat[i][j] = 0;
+    for(int i=1; i<n; i++){
+        for(int j=1; j<m; j++){
+            if(mat[i][j] != 0){
+                // check for row and col
+                if(mat[i][0] || mat[0][j] == 0){
+                    mat[i][j] = 0;
+                }
             }
         }
     }
+    if(mat[0][0] == 0){
+        for(int j=0; j<m; j++) mat[0][j] = 0;
+    }
+    if(col0 == 0){
+        for(int i=0; i<n; i++) mat[i][0] = 0;
+    }
+    
 }
-
-// Optimal approch
- 
 
 int main(){
     int n;
