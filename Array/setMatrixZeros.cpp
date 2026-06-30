@@ -7,35 +7,54 @@ using namespace std;
 
 // brute force approch
 
-void setMatrixZeroes(vector<vector<int>> & mat, int n, int m){
+// void setMatrixZeroes(vector<vector<int>> & mat, int n, int m){
+//     for(int i=0; i<n; i++){
+//         for(int j=0; j<m; j++){
+//             if (mat[i][j] == 0) {
+//                 // Mark all elements in this row as -1 (except existing zeros)
+//                 for (int col = 0; col < m; col++) {
+//                     if (mat[i][col] != 0)
+//                       mat[i][col] = -1;
+//                 }
+
+//                 // Mark all elements in this column as -1 (except existing zeros)
+//                 for (int row = 0; row < n; row++) {
+//                     if (mat[row][j] != 0)
+//                         mat[row][j] = -1;
+//                 }
+//             }
+//         }
+//     }
+//     for(int i=0; i<n; i++){
+//         for(int j=0; j<m; j++){
+//             if(mat[i][j] == -1){
+//                 mat[i][j] = 0;
+//             }
+//         }
+//     }
+// }
+
+// better approch
+
+void setMatrixZeroes(vector<vector<int>> &mat, int n, int m){
+    vector<int> row(n);
+    vector<int> col(m);
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            if (mat[i][j] == 0) {
-                // Mark all elements in this row as -1 (except existing zeros)
-                for (int col = 0; col < m; col++) {
-                    if (mat[i][col] != 0)
-                      mat[i][col] = -1;
-                }
-
-                // Mark all elements in this column as -1 (except existing zeros)
-                for (int row = 0; row < n; row++) {
-                    if (mat[row][j] != 0)
-                        mat[row][j] = -1;
-                }
+            if(mat[i][j] == 0){
+                row[i] = 1;
+                col[j] = 1;
             }
         }
     }
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            if(mat[i][j] == -1){
+            if(row[i] || col[j]){
                 mat[i][j] = 0;
             }
         }
     }
 }
-
-// better approch
-
 
 // Optimal approch
  
