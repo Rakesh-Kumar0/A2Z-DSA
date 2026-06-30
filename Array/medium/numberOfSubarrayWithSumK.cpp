@@ -22,21 +22,35 @@ using namespace std;
 
 //better approch
 
+// int numberOfSubarrayWithSumK(vector<int> &arr, int n, int k){
+//     int cnt = 0;
+//     for(int i=0; i<n; i++){
+//         int sum = 0;
+//         for(int j=i; j<n; j++){
+//             sum +=arr[j];
+//             if(sum == k){
+//                 cnt++;
+//             }
+//         }
+//     }
+//     return cnt;
+// }
+
+// optimal approch
+
 int numberOfSubarrayWithSumK(vector<int> &arr, int n, int k){
+    map<int, int> mpp;
+    mpp[0] = 1;
+    int preSum = 0;
     int cnt = 0;
     for(int i=0; i<n; i++){
-        int sum = 0;
-        for(int j=i; j<n; j++){
-            sum +=arr[j];
-            if(sum == k){
-                cnt++;
-            }
-        }
+        preSum +=arr[i];
+        int remove = preSum - k;
+        cnt = cnt + mpp[remove];
+        mpp[preSum] +=1;
     }
     return cnt;
 }
-
-
 
 
 int main(){
