@@ -3,14 +3,30 @@
 #include<map>
 using namespace std;
 
+// brute force approch
+// int countSubArrayWithXORasK(vector<int> &arr, int n, int k){
+//    int cnt = 0;
+//    for(int i=0; i<n; i++){
+//         for(int j=i; j<n; j++){
+//             int XOR = 0;
+//             for(int k=i; k<=j; k++){
+//                 XOR = XOR ^ arr[k];
+//             }
+//             if(XOR == k) cnt++;
+//         }
+//    }
+//    return cnt;
+
+// }
+
+// better approch
+
 int countSubArrayWithXORasK(vector<int> &arr, int n, int k){
    int cnt = 0;
    for(int i=0; i<n; i++){
+        int XOR = 0;
         for(int j=i; j<n; j++){
-            int XOR = 0;
-            for(int k=i; k<=j; k++){
-                XOR = XOR ^ arr[k];
-            }
+            XOR = XOR ^ arr[j];
             if(XOR == k) cnt++;
         }
    }
