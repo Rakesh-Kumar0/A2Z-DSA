@@ -32,10 +32,6 @@ int maximumSubarrayProduct(vector<int> &arr, int n){
     return maxi;
 }
 
-
-
-
-
 int main(){
     int n;
     cout<<"Enter size of an array : ";
