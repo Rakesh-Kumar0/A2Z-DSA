@@ -42,7 +42,7 @@ void merge(vector<int>& arr, int low, int mid, int high) {
         int cnt = 0;
         int right = mid + 1;
         for(int i=low; i<=mid; i++){
-            while(right<= high && arr[i] > 2 * arr[right]){
+            while(right<= high && (long long)arr[i] > 2LL * arr[right]){
                 right++;
             }
             cnt = cnt + (right - (mid + 1));
