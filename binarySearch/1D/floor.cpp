@@ -2,8 +2,6 @@
 #include<vector>
 using namespace std;
 
-
-// binary search
 int floor(vector<int> &arr, int n, int x){
     int low = 0;
     int high = n-1;
