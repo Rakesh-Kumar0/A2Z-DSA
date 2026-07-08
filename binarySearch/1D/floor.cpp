@@ -2,20 +2,12 @@
 #include<vector>
 using namespace std;
 
-// brute force approch
-// int lowerBound(vector<int> &arr, int n, int x){
-//     for(int i=0; i<n; i++){
-//         if(arr[i] >= x) return i;
-//     }
-//     return n;
-// }
 
 // binary search
-
-int lowerBound(vector<int> &arr, int n, int x){
+int floor(vector<int> &arr, int n, int x){
     int low = 0;
     int high = n-1;
-    int ans = n;
+    int ans = -1;
     while(low <= high){
         int mid = (low + mid) / 2;
         if(arr[mid] >= x){
@@ -41,7 +33,7 @@ int main(){
     int x;
     cout<<"Enter value of x : ";
     cin>>x;
-    int result = lowerBound(arr, n , x);
+    int result = floor(arr, n , x);
     cout<<result;
     return 0;
 }
