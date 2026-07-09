@@ -3,16 +3,53 @@
 using namespace std;
 
 // brute force approch
-vector<int> firstAndLastOccurrence(vector<int> &arr, int n, int target){
-    int first = -1;
-    int last = -1;
-    for(int i=0; i<n; i++){
-        if(arr[i] == target){
-            if(first == -1) first = i;
-            last = i;
+// pair<int, int> firstAndLastPosition(vector<int> &arr, int n, int target){
+//     int first = -1;
+//     int last = -1;
+//     for(int i=0; i<n; i++){
+//         if(arr[i] == target){
+//             if(first == -1) first = i;
+//             last = i;
+//         }
+//     }
+//     return {first, last};
+// }
+
+// binary Search
+
+int lowerBound(vector<int> &arr, int n, int target){
+    int low = 0;
+    int high = n-1;
+    int ans = n;
+    while(low <= high){
+        int mid = (low+high)/2;
+        if(arr[mid] >= target){
+            ans = mid;
+            high = mid - 1;
         }
+        else low = mid + 1;
     }
-    return {first, last};
+    return ans;
+}
+
+int upperBound(vector<int> &arr, int n, int target){
+    int low = 0;
+    int high = n-1;
+    int ans = n;
+    while(low <= high){
+        int mid = (low+high)/2;
+        if(arr[mid] > target){
+            ans = mid;
+            high = mid - 1;
+        }
+        else low = mid + 1;
+    }
+    return ans;
+}
+pair<int, int> firstAndLastPosition(vector<int> &arr, int n, int target){
+    int lb = lowerBound(arr,n,target);
+    if(lb == n || arr[lb] != target) return {-1, -1};
+    return {lb, upperBound(arr,n,target)-1};
 }
 
 int main(){
@@ -29,7 +66,7 @@ int main(){
     int x;
     cout<<"Enter value of x : ";
     cin>>x;
-    vector<int> result = firstAndLastOccurrence(arr, n , x);
-    cout<<"{"<<result[0]<<" "<<result[1]<<"}";
+    pair<int, int> result = firstAndLastPosition(arr, n , x);
+    cout<<"{"<<result.first<<" "<<result.second<<"}";
     return 0;
 }
