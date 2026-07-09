@@ -11,7 +11,7 @@ int minimumInRotatedSortedArray(vector<int> &arr, int n){
     int ans = INT_MAX;
     while(low <= high){
         int mid = (low + high) / 2;
-        if(arr[low] == arr[mid]){
+        if(arr[low] <= arr[mid]){
             ans = min(ans, arr[low]);
             low = mid+1;
         }
