@@ -39,12 +39,28 @@ bool possible(vector<int> &arr, int n, int day, int m, int k){
 
 
 // brute force
+// int noOfDays(vector<int> &arr, int n, int m, int k){
+//     if(n < m * k) return -1;
+//     for(int i=minElement(arr,n); i<= maxElement(arr,n); i++){
+//         if(possible(arr, n, i, m, k) == true) return i;
+//     }
+//     return -1;
+// }
+
+// binary search
 int noOfDays(vector<int> &arr, int n, int m, int k){
-    if(n < m * k) return -1;
-    for(int i=minElement(arr,n); i<= maxElement(arr,n); i++){
-        if(possible(arr, n, i, m, k) == true) return i;
+    int low = minElement(arr, n);
+    int high = maxElement(arr, n);
+    int ans = high;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        if(possible(arr, n, mid, m, k) == true){
+            ans = mid;
+            high = mid -1;
+        }
+        else low = mid + 1;
     }
-    return -1;
+    return ans;
 }
 
 int main(){
