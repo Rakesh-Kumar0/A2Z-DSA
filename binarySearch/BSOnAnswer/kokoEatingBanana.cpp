@@ -16,8 +16,8 @@ int maxElement(vector<int> &arr, int n){
     return maxi;
 }
 // function that find total hour
-int totalHour(vector<int> &arr, int k, int n){
-    int totalhour = 0;
+long long totalHour(vector<int> &arr, int k, int n){
+    long long totalhour = 0;
     for(int i=0; i<n; i++){
         totalhour += ceil((double)arr[i]/(double)k);
     }
@@ -28,8 +28,8 @@ int kokoEatingBanana(vector<int> &arr, int hour, int n){
     int low = 1;
     int high = maxElement(arr, n);
     while(low <= high){
-        int mid = (low + high)/2;
-        int totalhrs = totalHour(arr, mid, n);
+        int mid = low + (high - low) / 2;
+        long long totalhrs = totalHour(arr, mid, n);
         if(totalhrs <= hour) high = mid - 1;
         else low = mid + 1;
     }
