@@ -23,7 +23,7 @@ int daysNeeded(vector<int> &arr, int capacity){
 }
 
 // Brute force approch
- int shipWithinDays(vector<int> &arr, int day){
+int shipWithinDays(vector<int> &arr, int day){
     // Find maximum weight as minimum capacity
     int left = *max_element(arr.begin(), arr.end());
     // Find total sum as maximum capacity
@@ -36,7 +36,7 @@ int daysNeeded(vector<int> &arr, int capacity){
     }
     return right;
 
- }
+}
 
 int main(){
     int n;
