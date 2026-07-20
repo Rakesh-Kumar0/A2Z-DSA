@@ -23,19 +23,32 @@ int daysNeeded(vector<int> &arr, int capacity){
 }
 
 // Brute force approch
-int shipWithinDays(vector<int> &arr, int day){
-    // Find maximum weight as minimum capacity
-    int left = *max_element(arr.begin(), arr.end());
-    // Find total sum as maximum capacity
-    int right = accumulate(arr.begin(), arr.end(), 0);
-    for(int capacity=left; capacity<=right; capacity++){
-        int needed = daysNeeded(arr, capacity);
-        if(needed <= day ){
-            return capacity;
-        }
-    }
-    return right;
+// int shipWithinDays(vector<int> &arr, int day){
+//     // Find maximum weight as minimum capacity
+//     int left = *max_element(arr.begin(), arr.end());
+//     // Find total sum as maximum capacity
+//     int right = accumulate(arr.begin(), arr.end(), 0);
+//     for(int capacity=left; capacity<=right; capacity++){
+//         int needed = daysNeeded(arr, capacity);
+//         if(needed <= day ){
+//             return capacity;
+//         }
+//     }
+//     return right;
 
+// }
+
+// using binary search
+int shipWithinDays(vector<int> &arr, int day){
+    int low = *max_element(arr.begin(), arr.end());
+    int high = accumulate(arr.begin(), arr.end(),0);
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        int needed = daysNeeded(arr, mid);
+        if(needed <= day) high = mid -1;
+        else low = mid + 1;
+    }
+    return low;
 }
 
 int main(){
