@@ -7,13 +7,27 @@
 using namespace std;
 
 // brute force approch
+// int kthMissingNumber(vector<int> &arr, int k){
+//     for(int i=0; i<arr.size(); i++){
+//         if(arr[i] <= k) k++;
+//         else break;
+//     }
+//     return k;
+// }
+
+//binary search
 int kthMissingNumber(vector<int> &arr, int k){
-    for(int i=0; i<arr.size(); i++){
-        if(arr[i] <= k) k++;
-        else break;
+    int low = 0;
+    int high = arr.size() - 1;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        int missing = arr[mid] - (mid + 1); // number of missing value
+        if(missing < k) low = mid + 1;
+        else high = mid - 1;
     }
-    return k;
+    return (low + k); // this is fromula derived
 }
+
 
 
 int main(){
