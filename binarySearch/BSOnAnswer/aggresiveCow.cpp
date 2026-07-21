@@ -6,7 +6,7 @@
 #include<cmath>
 using namespace std;
 
-// brute force approch
+
 // Function to check if we can place all cows with at least distance 'd'
 bool canWePlace(vector<int> &arr, int cows, int dist){
     int count = 1;
@@ -21,14 +21,30 @@ bool canWePlace(vector<int> &arr, int cows, int dist){
     else return false;
 }
 
+// brute force approch
 // Function to find maximum minimum distance using brute force
+// int aggresiveCow(vector<int> &arr, int cows){
+//     sort(arr.begin(), arr.end());
+//     for(int i=1; i<=(arr[arr.size()-1] - arr[0]); i++){
+//         if(canWePlace(arr, cows, i) == true) continue;
+//         else return (i - 1);
+//     }
+//     return -1;
+// } 
+
+// binary search
 int aggresiveCow(vector<int> &arr, int cows){
     sort(arr.begin(), arr.end());
-    for(int i=1; i<=(arr[arr.size()-1] - arr[0]); i++){
-        if(canWePlace(arr, cows, i) == true) continue;
-        else return (i - 1);
+    int low = 0;
+    int high = arr.size() - 1;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        if(canWePlace(arr, cows, mid) == true){
+            low = mid + 1;
+        }
+        else high = mid -1;
     }
-    return -1;
+    return high;
 } 
 int main(){
     int n;
