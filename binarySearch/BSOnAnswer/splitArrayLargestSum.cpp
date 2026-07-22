@@ -7,20 +7,20 @@
 using namespace std;
 
 
-// Function to count the minimum number of painter required
-int countPainter(vector<int> &arr, int time){
-    int painter = 1;
-    int boardsPainter = 0;
+// Function to count how many partitions are needed
+int countPartition(vector<int> &arr, int maxsum){
+    int partition = 1;
+    int subarraySum = 0;
     for(int i=0; i<arr.size(); i++){
-        if((boardsPainter + arr[i]) <= time){
-            boardsPainter += arr[i];
+        if((subarraySum + arr[i]) <= maxsum){
+            subarraySum += arr[i];
         }
         else{
-            painter++;
-            boardsPainter = arr[i];
+            partition++;
+            subarraySum = arr[i];
         }
     }
-    return painter;
+    return partition;
 }
 
 // brute force approch
@@ -42,13 +42,13 @@ int countPainter(vector<int> &arr, int time){
 
 
 // binary search
-int findtime(vector<int> &arr, int n, int painter){
+int findSubarrayAum(vector<int> &arr, int n, int k){
    int low = *max_element(arr.begin(), arr.end());
    int high = accumulate(arr.begin(), arr.end(), 0);
    while(low <= high){
     int mid = low +(high - low)/2;
-    int cntStu = countPainter(arr, mid);
-    if(cntStu > painter) low = mid + 1;
+    int cntpart = countPartition(arr, mid);
+    if(cntpart > k) low = mid + 1;
     else high = mid - 1;
    }
    return low;
@@ -69,7 +69,7 @@ int main(){
     int k ;
     cout<<"Enter the numbers of subarray: ";
     cin>>k;
-    int result =findtime(arr, n, k);
+    int result =findSubarrayAum(arr, n, k);
     cout<<result;
     return 0;
 }
