@@ -24,35 +24,35 @@ int countPartition(vector<int> &arr, int maxsum){
 }
 
 // brute force approch
-// Function to find the minimum time to paint all boards using at most k painters
-// int findtime(vector<int> &arr, int n, int painter){
-//     // If students are more than books, allocation is impossible.
-//     if(painter > n) return -1;
-//     // Minimum possible answer is the largest book.
-//     int low = *max_element(arr.begin(), arr.end());
+// Function to find the smallest maximum subarray sum possible
+int findSubarrayAum(vector<int> &arr, int n, int k){
+    // If students are more than books, allocation is impossible.
+    if(k > n) return -1;
+    // Minimum possible answer is the largest book.
+    int low = *max_element(arr.begin(), arr.end());
 
-//     // Maximum possible answer is the sum of all pages.
-//     int high = accumulate(arr.begin(), arr.end(), 0);
-//     for(int i=low; i<=high; i++){
-//         int cntPainter = countPainter(arr, i);
-//         if(cntPainter == painter) return i;
-//     }
-//     return -1;
-// }
+    // Maximum possible answer is the sum of all pages.
+    int high = accumulate(arr.begin(), arr.end(), 0);
+    for(int i=low; i<=high; i++){
+        int cntPart = countPartition(arr, i);
+        if(cntPart == k) return i;
+    }
+    return -1;
+}
 
 
 // binary search
-int findSubarrayAum(vector<int> &arr, int n, int k){
-   int low = *max_element(arr.begin(), arr.end());
-   int high = accumulate(arr.begin(), arr.end(), 0);
-   while(low <= high){
-    int mid = low +(high - low)/2;
-    int cntpart = countPartition(arr, mid);
-    if(cntpart > k) low = mid + 1;
-    else high = mid - 1;
-   }
-   return low;
-}
+// int findSubarrayAum(vector<int> &arr, int n, int k){
+//    int low = *max_element(arr.begin(), arr.end());
+//    int high = accumulate(arr.begin(), arr.end(), 0);
+//    while(low <= high){
+//     int mid = low +(high - low)/2;
+//     int cntpart = countPartition(arr, mid);
+//     if(cntpart > k) low = mid + 1;
+//     else high = mid - 1;
+//    }
+//    return low;
+// }
 
 int main(){
     int n;
