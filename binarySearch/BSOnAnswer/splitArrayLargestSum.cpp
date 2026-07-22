@@ -7,7 +7,7 @@
 using namespace std;
 
 
-// Helper function to count how many painters are required to paint the boards within the given time limit
+// Function to count the minimum number of painter required
 int countPainter(vector<int> &arr, int time){
     int painter = 1;
     int boardsPainter = 0;
@@ -66,10 +66,10 @@ int main(){
         cin>>temp;
         arr.push_back(temp);
     }
-    int painter ;
-    cout<<"Enter the numbers of partition : ";
-    cin>>painter;
-    int result =findtime(arr, n, painter);
+    int k ;
+    cout<<"Enter the numbers of subarray: ";
+    cin>>k;
+    int result =findtime(arr, n, k);
     cout<<result;
     return 0;
 }
