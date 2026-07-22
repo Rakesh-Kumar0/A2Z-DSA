@@ -25,23 +25,34 @@ int countStudents(vector<int> &arr, int pages){
 
 // brute force approch
 // Function to find the minimum possible maximum pages.
-int findPages(vector<int> &arr, int n, int student){
-    // If students are more than books, allocation is impossible.
-    if(student > n) return -1;
-    // Minimum possible answer is the largest book.
-    int low = *max_element(arr.begin(), arr.end());
+// int findPages(vector<int> &arr, int n, int student){
+//     // If students are more than books, allocation is impossible.
+//     if(student > n) return -1;
+//     // Minimum possible answer is the largest book.
+//     int low = *max_element(arr.begin(), arr.end());
 
-    // Maximum possible answer is the sum of all pages.
-    int high = accumulate(arr.begin(), arr.end(), 0);
-    for(int i=low; i<=high; i++){
-        int cntStu = countStudents(arr, i);
-        if(cntStu == student) return i;
-    }
-    return -1;
-}
+//     // Maximum possible answer is the sum of all pages.
+//     int high = accumulate(arr.begin(), arr.end(), 0);
+//     for(int i=low; i<=high; i++){
+//         int cntStu = countStudents(arr, i);
+//         if(cntStu == student) return i;
+//     }
+//     return -1;
+// }
 
 
 // binary search
+int findPages(vector<int> &arr, int n, int student){
+   int low = *max_element(arr.begin(), arr.end());
+   int high = accumulate(arr.begin(), arr.end(), 0);
+   while(low <= high){
+    int mid = low +(high - low)/2;
+    int cntStu = countStudents(arr, mid);
+    if(cntStu > student) low = mid + 1;
+    else high = mid - 1;
+   }
+   return low;
+}
 
 int main(){
     int n;
