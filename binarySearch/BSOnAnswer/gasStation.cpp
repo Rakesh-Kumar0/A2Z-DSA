@@ -4,35 +4,58 @@
 #include<algorithm>
 #include<numeric>
 #include<cmath>
+#include<queue>
 using namespace std;
 
 // brute force approch
+// long double minimizeMaxDistanc(vector<int> &arr, int k){
+//     int n = arr.size();
+//     vector<int> howMany(n-1 , 0);
+//     for(int gasStations=1; gasStations<=k; gasStations++){
+//         long double maxSection = -1;
+//         int maxInd = -1;
+//         for(int i=0; i<n-1; i++){
+//             long double diff = (arr[i+1] - arr[i]);
+//             long double sectionLength = diff / (long double)(howMany[i] + 1);
+//             if(sectionLength > maxSection){
+//                 maxSection = sectionLength;
+//                 maxInd = i;
+
+//             }
+//         }
+//         howMany[maxInd]++;
+//     }
+//     long double maxAns = -1;
+//     for(int i=0; i<n-1; i++){
+//         long double diff = (arr[i+1] - arr[i]);
+//         long double sectionLength = diff / (long double)(howMany[i] + 1);
+//         maxAns = max(maxAns, sectionLength);
+//     }
+//     return maxAns;
+// }
+
+
+
+// better approch
 long double minimizeMaxDistanc(vector<int> &arr, int k){
     int n = arr.size();
     vector<int> howMany(n-1 , 0);
-    for(int gasStations=1; gasStations<=k; gasStations++){
-        long double maxSection = -1;
-        int maxInd = -1;
-        for(int i=0; i<n-1; i++){
-            long double diff = (arr[i+1] - arr[i]);
-            long double sectionLength = diff / (long double)(howMany[i] + 1);
-            if(sectionLength > maxSection){
-                maxSection = sectionLength;
-                maxInd = i;
-
-            }
-        }
-        howMany[maxInd]++;
-    }
-    long double maxAns = -1;
+    priority_queue<pair<long double, int>> pq;
     for(int i=0; i<n-1; i++){
-        long double diff = (arr[i+1] - arr[i]);
-        long double sectionLength = diff / (long double)(howMany[i] + 1);
-        maxAns = max(maxAns, sectionLength);
+        pq.push({arr[i+1] - arr[i], i});
     }
-    return maxAns;
+    for(int gasStations=1; gasStations<=k; gasStations++){
+        auto tp = pq.top();
+        pq.pop();
+        int sectionInd = tp.second;
+        howMany[sectionInd]++;
+        long double iniDiff = arr[sectionInd + 1] - arr[sectionInd];
+        long double  newSecLen = iniDiff / (long double)(howMany[sectionInd] +1);
+        pq.push({newSecLen, sectionInd});
+    }
+    
+    return pq.top().first;
 }
-
 int main(){
     int n;
     cout<<"Enter size of an array : ";
