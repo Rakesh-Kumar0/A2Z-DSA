@@ -41,7 +41,7 @@ using namespace std;
 // }
 
 
-// optimal approch
+// better approch
 double median(vector<int> &arr1, vector<int> &arr2){
     int n1 = arr1.size();
     int n2 = arr2.size();
