@@ -16,15 +16,30 @@ using namespace std;
 
 // better approch
 // function that search element in each row
-bool searchInRow(vector<int> &mat, int m, int target){
-    for(int i=0; i<m; i++){
-        if(mat[i] == target) return true;
-    }
-    return false;
-}
+// bool searchInRow(vector<int> &mat, int m, int target){
+//     for(int i=0; i<m; i++){
+//         if(mat[i] == target) return true;
+//     }
+//     return false;
+// }
+// bool searchElement(vector<vector<int>> &mat, int n, int m, int target){
+//     for(int i=0; i<n; i++){
+//         if(mat[i][0] <= target && target <= mat[i][m-1]) return searchInRow(mat[i], m, target);
+//     }
+//     return false;
+// }
+
+// binary search
 bool searchElement(vector<vector<int>> &mat, int n, int m, int target){
-    for(int i=0; i<n; i++){
-        if(mat[i][0] <= target && target <= mat[i][m-1]) return searchInRow(mat[i], m, target);
+    int low = 0;
+    int high = n*m-1;
+    while(low <= high){
+        int mid = low + (high - low)/2;
+        int row = mid / m;
+        int col = mid % m;
+        if(mat[row][col] == target) return true;
+        else if(mat[row][col] < target) low = mid + 1;
+        else high = mid - 1;
     }
     return false;
 }
