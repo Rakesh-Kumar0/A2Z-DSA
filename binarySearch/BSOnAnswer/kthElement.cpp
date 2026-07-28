@@ -6,75 +6,74 @@
 using namespace std;
 
 // brute force approch
-// double median(vector<int> &arr1, vector<int> &arr2){
-//     int n1 = arr1.size();
-//     int n2 = arr2.size();
-//     vector<int> arr3;
-//     int i=0; 
-//     int j=0;
-//     // mrege two sorted arrays
-//     while(i < n1 && j < n2){
-//         if(arr1[i] < arr2[j]){
-//             arr3.push_back(arr1[i]);
-//             i++;
-//         }
-//         else{
-//             arr3.push_back(arr2[j]);
-//             j++;
-//         }
-//     }
-//     while(i < n1){
-//         arr3.push_back(arr1[i]);
-//         i++;
-//     }
-//     while(j < n2){
-//         arr3.push_back(arr2[j]);
-//         j++;
-//     }
-//     int n = n1 + n2;
-//     if(n % 2 == 1){
-//         return arr3[n/2];
-//     }
-    
-//     return (double)((double)arr3[n/2] + (double)arr3[n/2 - 1])/2.0;
-    
-// }
-
-
-// better approch
 double kthElement(vector<int> &arr1, vector<int> &arr2, int k){
     int n1 = arr1.size();
     int n2 = arr2.size();
-    int n = n1 + n2;
+    vector<int> arr3;
     int i=0; 
     int j=0;
-    int indx = k - 1; // because of 0 base indexing that is why -1
-    int cnt = 0;
+    int n = n1 + n2;
+    // mrege two sorted arrays
     while(i < n1 && j < n2){
         if(arr1[i] < arr2[j]){
-            if(cnt == indx) return arr1[i];
-            cnt++;
+            arr3.push_back(arr1[i]);
             i++;
         }
         else{
-            if(cnt == indx) return arr2[j];
-            cnt++;
+            arr3.push_back(arr2[j]);
             j++;
         }
     }
     while(i < n1){
-        if(cnt == indx) return arr1[i];
-        cnt++;
+        arr3.push_back(arr1[i]);
         i++;
     }
     while(j < n2){
-        if(cnt == indx) return arr2[j];
-        cnt++;
+        arr3.push_back(arr2[j]);
         j++;
+    }
+    for(int i=0; i<n; i++){
+        if(i == k - 1) return arr3[i];
     }
     return 0;
     
 }
+
+
+// better approch
+// double kthElement(vector<int> &arr1, vector<int> &arr2, int k){
+//     int n1 = arr1.size();
+//     int n2 = arr2.size();
+//     int n = n1 + n2;
+//     int i=0; 
+//     int j=0;
+//     int indx = k - 1; // because of 0 base indexing that is why -1
+//     int cnt = 0;
+//     while(i < n1 && j < n2){
+//         if(arr1[i] < arr2[j]){
+//             if(cnt == indx) return arr1[i];
+//             cnt++;
+//             i++;
+//         }
+//         else{
+//             if(cnt == indx) return arr2[j];
+//             cnt++;
+//             j++;
+//         }
+//     }
+//     while(i < n1){
+//         if(cnt == indx) return arr1[i];
+//         cnt++;
+//         i++;
+//     }
+//     while(j < n2){
+//         if(cnt == indx) return arr2[j];
+//         cnt++;
+//         j++;
+//     }
+//     return 0;
+    
+// }
 
 // optimal approch
 // double kthElement(vector<int> &arr1, vector<int> &arr2, int k){
