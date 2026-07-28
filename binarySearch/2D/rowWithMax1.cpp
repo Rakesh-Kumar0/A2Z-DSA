@@ -5,7 +5,7 @@ using namespace std;
 
 // brute force
 // int rowWithMax1s(vector<vector<int>> &mat, int n, int m){
-//     int maxCnt = -1;
+//     int maxCnt = 0;
 //     int index = -1;
 //     for(int i=0; i<n; i++){
 //         int cntOnes = 0;
@@ -38,7 +38,7 @@ int lowerBound(vector<int> &arr, int n, int x){
     return ans;
 }
 int rowWithMax1s(vector<vector<int>> &mat, int n, int m){
-    int maxCnt = -1;
+    int maxCnt = 0;
     int index = -1;
     for(int i=0; i<n; i++){
         int cntOnes = m - lowerBound(mat[i], m, 1);
