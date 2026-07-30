@@ -8,12 +8,13 @@ using namespace std;
 double power(double x, int n){
     // base case
     if(n == 0 || x == 1.0) return 1;
+    long long temp = n; // to avoid integer overflow
     if(n < 0){
         x = 1/x;
-        n = -1 * n; // make n positive
+        temp = -1 *1LL* n; // make n positive
     }
     double ans = 1;
-    for(int i=1; i<=n; i++){
+    for(long long i=1; i<=temp; i++){
         ans = ans * x;
     }
     return ans;
