@@ -39,9 +39,10 @@ void helper(string &s, int index, string current, vector<string> &result){
     }
     // Exclude current character and recurse
     helper(s, index+1, current, result);
+    // Exclude current character and recurse
     current.push_back(s[index]);
     helper(s, index+1, current, result);
-    current.pop_back(s[index]);
+    current.pop_back();
 
 }
 
