@@ -4,21 +4,24 @@
 using namespace std;
 
 //brute force
-int xorInRange(int l, int r){
-    int ans = 0;
-    for(int i=l; i<=r; i++){
-        ans = ans^i;
-    }
-    return ans;
-}
+// int xorInRange(int l, int r){
+//     int ans = 0;
+//     for(int i=l; i<=r; i++){
+//         ans = ans^i;
+//     }
+//     return ans;
+// }
 
 // optimal solution
-// int xorInRange(int n){
-//     if(n%4 == 1) return 1;
-//     else if(n%4 == 2) return n+1;
-//     else if(n%4 == 3) return 0;
-//     else return n;
-// }
+int helper(int n){
+    if(n%4 == 1) return 1;
+    else if(n%4 == 2) return n+1;
+    else if(n%4 == 3) return 0;
+    else return n;
+}
+int xorInRange(int l, int r){
+    return helper(l-1) ^ helper(r);
+}
 int main(){
     int l;
     cout<<"Enter left value  : ";
