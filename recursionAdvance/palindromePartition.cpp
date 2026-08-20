@@ -2,6 +2,7 @@
 #include<string>
 #include<algorithm>
 #include<vector>
+#include<set>
 using namespace std;
 
 // functio which check string is palindrome
