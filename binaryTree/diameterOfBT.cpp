@@ -21,38 +21,38 @@ struct Node{
 };
 
 // brute force
-int getHeight(Node* root){
-    if(root == NULL) return 0;
-    int lh = getHeight(root->left);
-    int rh = getHeight(root->right);
-    return 1 + max(lh, rh);
-}
+// int getHeight(Node* root){
+//     if(root == NULL) return 0;
+//     int lh = getHeight(root->left);
+//     int rh = getHeight(root->right);
+//     return 1 + max(lh, rh);
+// }
 
-int findMax(Node* root){
-    if(root == NULL) return 0;
-    int maxi = INT_MIN;
-    int leftHeight = getHeight(root->left);
-    int rightHeight = getHeight(root->right);
-    maxi = max(maxi, leftHeight + rightHeight);
-    findMax(root->left);
-    findMax(root->right);
-    return maxi;
-}
+// int findMax(Node* root){
+//     if(root == NULL) return 0;
+//     int maxi = INT_MIN;
+//     int leftHeight = getHeight(root->left);
+//     int rightHeight = getHeight(root->right);
+//     maxi = max(maxi, leftHeight + rightHeight);
+//     findMax(root->left);
+//     findMax(root->right);
+//     return maxi;
+// }
 
 // optimal approch
 
-// int dfsHeight(Node* root){
-//     if(root == NULL) return 0;
-//     int lh = dfsHeight(root->left);
-//     if(lh == -1) return -1;
-//     int rh = dfsHeight(root->right);
-//     if(rh == -1) return -1;
-//     if(abs(lh-rh) > 1) return -1;
-//     return max(lh, rh) + 1;
-// }
-// bool checkBalance(Node* root){
-//     return dfsHeight(root) != -1;
-// }
+int height(Node* root, int &diameter){
+    if(root == NULL) return 0;
+    int lh = height(root->left, diameter);
+    int rh = height(root->right, diameter);
+    diameter = max(diameter, lh + rh);
+    return max(lh, rh) + 1;
+}
+int diameterOfBT(Node* root){
+    int diameter = 0;
+    height(root, diameter);
+    return diameter;
+}
 
 int main(){
     // creating the root node
@@ -63,7 +63,7 @@ int main(){
     root->left->right = new Node(5);
     root->right->left = new Node(6);
     root->right->right = new Node(7);
-    int result = findMax(root);
+    int result = diameterOfBT(root);
     cout<<result;
     
     return 0;
