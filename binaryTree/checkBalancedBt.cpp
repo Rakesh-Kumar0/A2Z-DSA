@@ -20,22 +20,32 @@ struct Node{
 };
 
 // brute force
-int getHeight(Node* root){
-    if(root == NULL) return 0;
-    int lh = getHeight(root->left);
-    int rh = getHeight(root->right);
-    return 1 + max(lh, rh);
-}
+// int getHeight(Node* root){
+//     if(root == NULL) return 0;
+//     int lh = getHeight(root->left);
+//     int rh = getHeight(root->right);
+//     return 1 + max(lh, rh);
+// }
 
-bool checkBalance(Node* root){
-    if(root == NULL) return true;
-    int leftHeight = getHeight(root->left);
-    int rightHeight = getHeight(root->right);
-    if(abs(rightHeight - leftHeight) > 1) return false;
-    bool left = checkBalance(root->left);
-    bool right = checkBalance(root->right);
-    if(!left || ! right) return false;
-    return true;
+// bool checkBalance(Node* root){
+//     if(root == NULL) return true;
+//     int leftHeight = getHeight(root->left);
+//     int rightHeight = getHeight(root->right);
+//     if(abs(rightHeight - leftHeight) > 1) return false;
+//     bool left = checkBalance(root->left);
+//     bool right = checkBalance(root->right);
+//     if(!left || ! right) return false;
+//     return true;
+// }
+
+// optimal approch
+int checkBalance(Node* root){
+    if(root == NULL) return 0;
+    int lh = checkBalance(root->left);
+    int rh = checkBalance(root->right);
+    if(lh == -1 && rh == -1) return -1;
+    if(abs(lh-rh) > 1) return -1;
+    return max(lh, rh) + 1;
 }
 
 int main(){
