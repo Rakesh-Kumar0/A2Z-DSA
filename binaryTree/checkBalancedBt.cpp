@@ -39,13 +39,18 @@ struct Node{
 // }
 
 // optimal approch
-int checkBalance(Node* root){
+
+int dfsHeight(Node* root){
     if(root == NULL) return 0;
-    int lh = checkBalance(root->left);
-    int rh = checkBalance(root->right);
-    if(lh == -1 && rh == -1) return -1;
+    int lh = dfsHeight(root->left);
+    if(lh == -1) return -1;
+    int rh = dfsHeight(root->right);
+    if(rh == -1) return -1;
     if(abs(lh-rh) > 1) return -1;
     return max(lh, rh) + 1;
+}
+bool checkBalance(Node* root){
+    return dfsHeight(root) != -1;
 }
 
 int main(){
