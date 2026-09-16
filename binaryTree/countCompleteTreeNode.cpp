@@ -25,7 +25,7 @@ int findHeightLeft(Node* node){
     int hght = 0;
     while(node){
         hght++;
-        node->left;
+        node = node->left;
     }
     return hght;
 }
@@ -34,7 +34,7 @@ int findHeightRight(Node* node){
     int hght = 0;
     while(node){
         hght++;
-        node->right;
+        node = node->right;
     }
     return hght;
 }
