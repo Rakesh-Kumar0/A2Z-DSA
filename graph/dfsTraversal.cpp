@@ -4,39 +4,38 @@
 #include<algorithm>
 using namespace std;
 
-// 0- base indexing graph
-vector<int> bfsTraversal(int v, vector<vector<int>> &adjlist){
-    vector<int> vis(v,0);
-    vis[0] = 1;
-    queue<int> q;
-    q.push(0);
-    vector<int> bfs;
-    while(!q.empty()){
-        int node = q.front();
-        q.pop();
-        bfs.push_back(node);
-        for(auto it : adjlist[node]){
-            if(!vis[it]){
-                vis[it] = 1;
-                q.push(it);
-            }
+// function of dfs traversal
+void dfs(int node, vector<vector<int>> &adjlist,vector<int> &vis, vector<int> &ls){
+    vis[node] = 1;
+    ls.push_back(node);
+    // traverse all its neighbour
+    for(auto it : adjlist[node]){
+        if(!vis[it]){
+            dfs(it, adjlist, vis, ls);
         }
     }
-    return bfs;
+}
+// function to return a list containing dfs traversal of the graph
+vector<int> dfsOfGraph(int v, vector<vector<int>> &adjlist){
+    vector<int> vis(v,0);
+    int start = 1;
+    vector<int> ls;
+   dfs(start, adjlist, vis, ls);
+   return ls;
 }
 
 int main(){
     int n,m;
     cin>>n>>m;
     vector<vector<int>> adjlist(n+1);
-    vector<int> vis(n,0);
+    // vector<int> vis(n,0);
     for(int i=0;i<m; i++){
         int u,v;
         cin>>u>>v;
         adjlist[u].push_back(v);
         adjlist[v].push_back(u);
     }
-    vector<int> result = bfsTraversal(n,adjlist);
+    vector<int> result = dfsOfGraph(n,adjlist);
     for(auto it : result){
         cout<<it <<" ";
     }
