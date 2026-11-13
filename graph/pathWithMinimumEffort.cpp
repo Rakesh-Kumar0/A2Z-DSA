@@ -30,6 +30,7 @@ int shortestPath(vector<vector<int>> &grid){
                 int newEffort = max(abs(grid[row][col] - grid[nrow][ncol]),diff);
                 if(newEffort < dist[nrow][ncol]){
                     dist[nrow][ncol] = newEffort;
+                    pq.push({newEffort,{nrow,ncol}});
                 }
             }
         }
