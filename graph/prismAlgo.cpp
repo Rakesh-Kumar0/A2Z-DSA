@@ -6,6 +6,7 @@
 #include<algorithm>
 using namespace std;
 
+// function to find spanning tree
 int spanningTree(int v, vector<vector<pair<int,int>>> &adjlist){
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
     vector<int> vis(v,0);
